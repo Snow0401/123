@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Page</title>
+</head>
+<body>
+<h1 th:text="|Greetings, ${user.getFirstName()} ${user.getLastName()}!|">Greetings</h1>
+<br>
+<h2>You successfully logged as: <span sec:authentication="name">Bob</span></h2>
+<hr>
+<br>
+<table>
+    <tbody>
+    <tr>
+        <td><h2><a href="/admin/users">Users administration</a></h2></td>
+        <td><h2>&nbsp &nbsp &nbsp</h2></td>
+        <td><h2><a href="/admin/roles">Roles administration</a></h2></td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<br>
+<hr>
+<div sec:authorize="isAuthenticated()">
+    <form th:action="@{/logout}" method="POST">
+        <input type="submit" value="Logout"/>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>All roles</title>
+</head>
+<body>
+<h1>Roles</h1>
+<br>
+<hr/>
+<br>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Role Name</th>
+        <th>Description</th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="role : ${roles}">
+        <td th:text="${role.getId()}">ID</td>
+        <td th:text="${role.getRoleName().substring(5)}">Role Name</td>
+        <td th:text="${role.getDescription()}">Description</td>
+        <td>
+            <form th:method="GET" th:action="@{/admin/roles/{id}(id=${role.getId()})}">
+                <input type="submit" value="View Details">
+            </form>
+        <td>
+            <form th:method="GET" th:action="@{/admin/roles/{id}/edit(id=${role.getId()})}">
+                <input type="submit" value="Edit Details">
+            </form>
+        </td>
+        <td>
+            <form th:method="DELETE" th:action="@{/admin/roles/{id}(id=${role.getId()})}">
+                <input type="submit" value="Delete Role">
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<form th:action="@{/admin/roles/new}" method="GET">
+    <input type="submit" value="Create New Role"/>
+</form>
+<br>
+<br>
+<hr>
+<div sec:authorize="isAuthenticated()">
+    <form th:action="@{/logout}" method="POST">
+        <input type="submit" value="Logout"/>
+    </form>
+</div>
+</body>
+</html>

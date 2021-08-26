@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>User</title>
+</head>
+<body>
+<h1>User Info</h1>
+<br>
+<hr>
+<br>
+<table>
+    <tbody>
+    <tr>
+        <td><b>Username: </b></td>
+        <td th:text="${user.getName}">Username</td>
+    </tr>
+    <tr>
+        <td><b>First Name: </b></td>
+        <td th:text="${user.getFirstName}">First Name</td>
+    </tr>
+    <tr>
+        <td><b>Last Name: </b></td>
+        <td th:text="${user.getLastName()}">Last Name</td>
+    </tr>
+    <tr>
+        <td><b>E-mail: </b></td>
+        <td th:text="${user.getEmail()}">Email</td>
+    </tr>
+    <tr>
+        <td><b>Age: </b></td>
+        <td th:text="${user.getAge()}">Email</td>
+    </tr>
+    <tr>
+        <td><b>Roles: </b></td>
+        <td>
+            <th:block th:each="role : ${user.getRoles()}">
+                <p th:text="${role.getRoleName().substring(5)}">Role</p>
+            </th:block>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<br>
+<hr>
+<div sec:authorize="isAuthenticated()">
+    <form th:action="@{/logout}" method="POST">
+        <input type="submit" value="Logout"/>
+    </form>
+</div>
+</body>
+</html>

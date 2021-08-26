@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Role</title>
+</head>
+<body>
+<h1 th:text="|Edit role: ${role.getRoleName().substring(5)}|">Edit role</h1>
+<br>
+<hr/>
+<br>
+<table>
+    <tbody>
+    <form th:method="PATCH" th:action="@{/admin/roles/{id}(id=${role.getId()})}" th:object="${role}">
+        <tr>
+            <td><label for="rolename">Role name</label></td>
+            <td><input type="text" th:field="*{roleName}" th:utext="  |NOTE: Strongly recommends use 'ROLE_' prefix in role name |" id="rolename"/></td>
+        </tr>
+        <br>
+        <tr>
+            <td><label for="description">Description</label></td>
+            <td><input type="text" th:field="*{description}" id="description"/></td>
+        </tr>
+        <br>
+        <tr>
+            <td colspan="2">
+                <center><input type="submit" value="Update Role"></center>
+            </td>
+        </tr>
+    </form>
+    </tbody>
+</table>
+<br>
+<br>
+<hr>
+<div sec:authorize="isAuthenticated()">
+    <form th:action="@{/logout}" method="POST">
+        <input type="submit" value="Logout"/>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Role</title>
+</head>
+<body>
+<h1>Role Info</h1>
+<br>
+<hr>
+<br>
+<table>
+    <tbody>
+    <tr>
+        <td><b>ID: </b></td>
+        <td th:text="${role.getId()}">ID</td>
+    </tr>
+    <br>
+    <tr>
+        <td><b>Role Name: </b></td>
+        <td th:text="${role.getRoleName().substring(5)}">Role Name</td>
+    </tr>
+    <br>
+    <tr>
+        <td><b>Description: </b></td>
+        <td th:text="${role.getDescription()}">Description</td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<br>
+<hr>
+<div sec:authorize="isAuthenticated()">
+    <form th:action="@{/logout}" method="POST">
+        <input type="submit" value="Logout"/>
+    </form>
+</div>
+</body>
+</html>
