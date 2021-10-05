@@ -22,6 +22,7 @@ public class UsersInit {
     @PostConstruct
     private void loadTestUsers() {
 
+
         Role adminRole = new Role();
         adminRole.setRoleName("ADMIN");
         adminRole.setDescription("Allow user's and roles administration");
